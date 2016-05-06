@@ -2,6 +2,7 @@
 *.log
 *.swp
 *.out
+.idea/
 
 # sbt specific
 .cache/

@@ -6,8 +6,9 @@ import org.apache.spark.SparkConf
 object SimpleApp {
   def main(args: Array[String]) {
     val logFile = args(0)
-    val conf = new SparkConf().
-      setAppName("Simple Application")
+    // val conf = new SparkConf().setAppName("Simple Application")
+    // Testando localmente...
+    val conf = new SparkConf().setAppName("Simple Application").setMaster("local[2]")
     // com sc você pode setar qualquer configuração passada na linha de comando
     // mas isso pode não ser uma boa ideia (por portabilidade)
     // por exemplo, --executor-memory
@@ -19,7 +20,7 @@ object SimpleApp {
     
     // esse exemplo lê um arquivo e conta linhas com 'a' e linhas com 'b'
     val logData = sc.textFile(logFile, 2).cache()
-    val numAs = logData.filter(line => line.contains("a")).count()
+    val numAs = logData.filter(line => line.contains("http")).count()
     val numBs = logData.filter(line => line.contains("b")).count()
     
     println("Lines with a: %s, Lines with b: %s".format(numAs, numBs))
